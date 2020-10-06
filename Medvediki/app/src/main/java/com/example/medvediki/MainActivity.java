@@ -9,7 +9,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
+import android.content.res.XmlResourceParser;
 import android.graphics.Color;
 import android.graphics.ColorSpace;
 import android.net.wifi.p2p.WifiP2pManager;
@@ -52,6 +55,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -73,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @SuppressLint({"SetJavaScriptEnabled"})
 
     @Override
@@ -87,10 +93,119 @@ public class MainActivity extends AppCompatActivity {
         exec = new Exec();
         textview.setMovementMethod(new ScrollingMovementMethod());
         textview.setBackgroundColor(Color.WHITE);
+        textview2.setMovementMethod(new ScrollingMovementMethod());
+        textview2.setBackgroundColor(Color.WHITE);
         int ii = 0;
+        int margin=0;
+        ///ЭТО ТЕСТ. НЕ ЗАБУДЬ УДАЛИТЬ!!
+        //StringBuilder stringBuilder = new StringBuilder();
+        //textview2.setElevation(4);
+        //textview2.setVisibility(View.VISIBLE);
 
-        ////////////////TEST DOUBLE CLICK
+        /*
+        Resources res = this.getResources();
+        XmlResourceParser xmlResourceParser = res.getXml(R.xml.site_res);
+
+        try {xmlResourceParser.next();
+            int eventType = xmlResourceParser.getEventType();
+        while (eventType != XmlPullParser.END_DOCUMENT) {
+            if (eventType == XmlPullParser.START_DOCUMENT) {
+                stringBuilder.append("Начало XML");
+                margin++;
+            } else if (eventType == XmlPullParser.START_TAG) {
+                margin++;
+                stringBuilder.append("\n");
+                for(int i=0;i<margin;i++)stringBuilder.append("   ");
+                stringBuilder.append("<").append(xmlResourceParser.getName()).append(">");
+
+            } else if (eventType == XmlPullParser.END_TAG) {
+                stringBuilder.append("\n");
+                for(int i=0;i<margin;i++)stringBuilder.append("   ");
+                stringBuilder.append("</").append(xmlResourceParser.getName()).append(">");
+                margin--;
+            } else if (eventType == XmlPullParser.TEXT) {
+                margin++;
+                stringBuilder.append("\n");
+                for(int i=0;i<margin;i++)stringBuilder.append("   ");
+                stringBuilder.append("TEXT: ").append(xmlResourceParser.getText());
+                margin--;
+            }
+            eventType = xmlResourceParser.next();
+        }
+        }catch (XmlPullParserException | IOException e){}
+        stringBuilder.append("\nКонец XML");
+
+
+
+
+        textview2.setText(stringBuilder.toString());
+        */
+        ///КОНЕЦ ТЕСТА. НЕ ЗАБУДЬ УДАЛИТЬ!!
+
+/*        ///ЭТО ТЕСТ. НЕ ЗАБУДЬ УДАЛИТЬ!!
+        textview2.setElevation(4);
+        textview2.setVisibility(View.VISIBLE);
+        Resources res = this.getResources();
+        try {
+            XmlPullParser parser = res.getXml(R.xml.site_res);
+
+            while (parser.getEventType() != XmlPullParser.END_DOCUMENT) {
+                if (parser.getEventType() == XmlPullParser.START_TAG
+                        && parser.getName().equals("contact")) {
+                    textview2.setText(textview2.getText()+"\n"+parser.getAttributeValue(0) + " "
+                            + parser.getAttributeValue(1) + "\n"
+                            + parser.getAttributeValue(2));
+                }
+                parser.next();
+            }
+        } catch (Throwable t) {
+            Toast.makeText(this,
+                    "Ошибка при загрузке XML-документа: " + t.toString(), Toast.LENGTH_LONG)
+                    .show();
+        }
+
+        ///КОНЕЦ ТЕСТА. НЕ ЗАБУДЬ УДАЛИТЬ!!*/
+
+
+
+        ////////////////TEST DOUBLE CLICK on small textview
         textview.setOnClickListener(new View.OnClickListener() {
+            int ii = 0;
+            int color=1;
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                ii++;
+                Handler handler = new Handler();
+                Runnable r = new Runnable() {
+
+                    @Override
+                    public void run() {
+                        ii = 0;
+                    }
+                };
+
+                if (ii == 1) {
+                    //Single click
+                    handler.postDelayed(r, 250);
+                } else
+                    //Double click
+                    if (ii == 2)
+                {
+                        //if (flag)textview2.setText(outContent);
+                        textview.setVisibility(View.INVISIBLE);
+                        textview2.setVisibility(View.VISIBLE);
+                        textview2.setElevation(4);
+                        flag=false;
+                    Log.d(TAG, "closeSmallTextView ");
+                    Log.d(TAG, "openBigTextView");
+
+                }
+
+            }
+        });
+        textview2.setOnClickListener(new View.OnClickListener() {
             int ii = 0;
             int color=1;
             @Override
@@ -112,50 +227,16 @@ public class MainActivity extends AppCompatActivity {
                 } else
                     //Double click
                     if (ii == 2)
-                {
-                    if(!flag)
                     {
+                        //if (flag)textview.setText(outContent);
+                        textview2.setVisibility(View.INVISIBLE);
+                        textview.setVisibility(View.VISIBLE);
+                        flag=false;
 
-                        //textview.setWidth(660);
-                        //textview.setMaxWidth(500);
-                        //textview.layout(30,30,690,900);
-                        //textview.setRight(690);
-                        textview2.setText(textview.getText());
-                        textview.setVisibility(View.INVISIBLE);
-                        textview2.setVisibility(View.VISIBLE);
-                        //color=textview.getLayout().getEllipsizedWidth();
-                        /*textview.setLeft(30);
-                        textview.setTop(30);
-                        textview.setWidth(700);
-                        textview.setHeight(870);*/
-
+                        Log.d(TAG, "openSmallTextView ");
+                        Log.d(TAG, "closeBigTextView");
 
                     }
-                    else
-                    {
-                        /*textview.layout(178,1046,540,1144);
-                        color=textview.getLayout().getEllipsizedWidth();*/
-                    }
-        /*scrollview.setLayoutParams(new LinearLayout.LayoutParams(200,200));
-        Log.d(TAG, "get Left "+scrollview.getLeft());
-        Log.d(TAG, "get Right "+scrollview.getRight());
-        Log.d(TAG, "get Top "+scrollview.getTop());
-        Log.d(TAG, "get Bottom "+scrollview.getBottom());
-        Log.d(TAG, "get Padding Left "+scrollview.getPaddingLeft());
-        Log.d(TAG, "get Padding Right "+scrollview.getPaddingRight());
-        Log.d(TAG, "get Padding Top "+scrollview.getPaddingTop());
-        Log.d(TAG, "get Padding Bottom "+scrollview.getPaddingBottom());
-        Log.d(TAG, "get Padding Start "+scrollview.getPaddingStart());
-        Log.d(TAG, "get Padding End "+scrollview.getPaddingEnd());
-        //scrollview.setTop(30);
-        */
-                    Log.d(TAG, "getLeft "+textview.getLeft());
-                    Log.d(TAG, "getRight "+textview.getRight());
-                    Log.d(TAG, "getTop "+textview.getTop());
-                    Log.d(TAG, "getBottom "+textview.getBottom());
-                    Log.d(TAG, "getEllipsizedWidth "+color);
-                    flag = !flag;
-                }
 
             }
         });
@@ -285,6 +366,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             catch (Exception e){}
+
             exec.doThread();
             exec.outThread();
 
@@ -343,6 +425,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public class Exec
     {
+
         private void outThread()
         {
             webview = findViewById(R.id.webView);
@@ -367,29 +450,102 @@ public class MainActivity extends AppCompatActivity {
             try{webview.getSettings().setBuiltInZoomControls(true);}catch(Exception e){}
             try{webview.getSettings().setDisplayZoomControls(false);}catch(Exception e){}
             outContent = list.get(iterDoc-1).html();
+            flag=true;
 
 
             webview.loadDataWithBaseURL(null, outContent, "text/html", "ru_RU", null);
             textview.setText(outContent);
+            textview2.setText(outContent);
         }
         private void doThread()
         {
+            String doWork="";
             if(edittext.getText().toString()!="")
             try {
                 if(edittext.getText().toString().startsWith("id_"))
                 {
-                    edittext.setText(edittext.getText().toString().substring(3, edittext.getText().toString().length()));
-                    doc.getElementById(edittext.getText().toString()).remove();
-
-                }
+                    doc.getElementById(edittext.getText().toString().substring(3, edittext.getText().toString().length())).remove();
+                } else if (edittext.getText().toString().startsWith("tag_"))
+                {doc.getElementsByTag(edittext.getText().toString().substring(4, edittext.getText().toString().length())).remove();   }
                 else doc.getElementsByClass(edittext.getText().toString()).remove();}
             catch(Exception e){}
 
+            //Чтение из xml-ресурса и правка doc
+            String siteName="",id_name="",class_name="",tag_name="";
+            Resources res = getResources();
+
+            XmlResourceParser xmlResourceParser = res.getXml(R.xml.site_res);
+            String edittext = edittext2.getText().toString();
+            String flagE="";
+            try {
+                xmlResourceParser.next();
+
+                int eventType = xmlResourceParser.getEventType();
+                while (eventType != XmlPullParser.END_DOCUMENT) {
+                    Log.d("STOP!",xmlResourceParser.getEventType()+" !"+siteName+"!"+" Name:"+xmlResourceParser.getName()+", Text:"+xmlResourceParser.getText()+", doWork: "+doWork);
+
+                    if(eventType!=XmlPullParser.END_DOCUMENT && (eventType==XmlPullParser.START_TAG||eventType==XmlPullParser.END_TAG))
+
+                    switch (xmlResourceParser.getName()) {
+                        case "URL":
+                            if(eventType==XmlPullParser.END_TAG){siteName="";break;}
+                            xmlResourceParser.next();
+                            try{siteName = xmlResourceParser.getText();}catch(Exception e){}
+
+                            break;
+                        case "Remove":
+                            if(eventType==XmlPullParser.END_TAG){doWork="";break;}
+                            doWork="remove";
+                            break;
+                        case "id":
+                            if(eventType==XmlPullParser.END_TAG){break;}
+                            xmlResourceParser.next();
+                            id_name=xmlResourceParser.getText();
+                            flagE="id";
+                            if(edittext.contains(siteName)||siteName.equals("*"))
+                            try{if (doWork.equals("remove"))doc.getElementById(id_name).remove();}catch(Exception e){}
+                            break;
+                        case "class":
+                            if(eventType==XmlPullParser.END_TAG){break;}
+                            xmlResourceParser.next();
+                            flagE="class";
+                            if(edittext.contains(siteName)||siteName.equals("*"))
+                            try{class_name=xmlResourceParser.getText();
+                            if (doWork.equals("remove"))doc.getElementsByClass(class_name).remove();}catch(Exception e){}
+                            break;
+                        case "tag":
+                            if(eventType==XmlPullParser.END_TAG){break;}
+                            xmlResourceParser.next();
+                            flagE="tag";
+                            if(edittext.contains(siteName)||siteName.equals("*")){
+                            try{tag_name=xmlResourceParser.getText();
+                                if (doWork.equals("remove"))doc.getElementsByTag(tag_name).remove();}catch(Exception e){}
+                            Log.d("STOP2!","tagName:"+tag_name+", flagE: "+flagE+", siteName:"+siteName+"!");}
+                            break;
+                        case "style":
+                            if(eventType==XmlPullParser.END_TAG){break;}
+                            xmlResourceParser.next();
+                            if(edittext.contains(siteName)||siteName.equals("*")){
+                                if(flagE.equals("id"))try{doc.getElementById(id_name).attr("style", xmlResourceParser.getText());}catch (Exception e){}
+                                if(flagE.equals("class"))try{doc.getElementsByClass(class_name).attr("style", xmlResourceParser.getText());}catch (Exception e){}
+                                if(flagE.equals("tag"))try{doc.getElementsByTag(tag_name).attr("style", xmlResourceParser.getText());}catch (Exception e){}
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                    eventType = xmlResourceParser.next();
+                }
+            }catch (XmlPullParserException | IOException e){}
+
+
+
+/*
             if(edittext2.getText().toString().contains("fishki.net")) {
                try{doc.getElementsByClass("sidebar").remove();} catch(Exception e){}
                try{doc.getElementsByClass("tiny__info").remove();} catch(Exception e){}
                try{doc.getElementsByClass("header-nav").remove();} catch(Exception e){}
-               try{ doc.getElementsByClass("header-settings").remove();} catch(Exception e){}
+               try{doc.getElementsByClass("header-settings").remove();} catch(Exception e){}
                try{doc.getElementsByClass("content__top-links").remove();} catch(Exception e){}
                try{doc.getElementsByClass("popup-meta").remove();} catch(Exception e){}
                try{doc.getElementsByClass("header_announcement").remove();} catch(Exception e){}
@@ -398,10 +554,11 @@ public class MainActivity extends AppCompatActivity {
                try{doc.getElementsByClass("community-post-header").remove();} catch(Exception e){}
                try{doc.getElementsByClass("comment-share").remove();} catch(Exception e){}
 
-                try {
+               try {
                     doc.getElementById("main-content").attr("style", "width:inherit");
                 } catch (Exception e) {}
             }
+*/
             list.add(iterDoc, doc);
             iterDoc++;
             //edittext.setText((iterDoc>1)?"true":"false");
