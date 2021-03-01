@@ -41,7 +41,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "sTAG";
+    private static final String TAG = "nmTag";
     protected Stream strWndws, strURLs;
     protected Button button;
     protected TextView textview, textview2;
