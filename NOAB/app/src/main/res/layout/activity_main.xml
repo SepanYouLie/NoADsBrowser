@@ -27,29 +27,29 @@
 
     <EditText
         android:id="@+id/editText2"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_width="258dp"
+        android:layout_height="37dp"
         android:elevation="5dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="https://m.fishki.net"
 
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editText"
-        android:layout_width="61dp"
-        android:layout_height="14dp"
+        android:layout_width="54dp"
+        android:layout_height="42dp"
 
         android:elevation="5dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/webView"
-        app:layout_constraintEnd_toEndOf="@+id/textView2"
-        tools:visibility="invisible" />
+        android:text="t"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintStart_toEndOf="@+id/editText2"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <ProgressBar
         android:id="@+id/progressBar"
