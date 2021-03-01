@@ -8,8 +8,9 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_width="362dp"
+        android:layout_height="541dp"
+        android:gravity="bottom"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="@+id/webView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -17,8 +18,8 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="40dp"
-        android:layout_height="37dp"
+        android:layout_width="48dp"
+        android:layout_height="36dp"
         android:onClick="onClick"
         android:text="-->"
         android:visibility="visible"

@@ -456,9 +456,9 @@ public class MainActivity extends AppCompatActivity {
                 Elements selects = doc.getAllElements();
                 for (Element e : selects) {
                     //Log.d("Local Url: ",e.outerHtml());
-                    e.attr("src", e.absUrl("src"));
-                    e.attr("href", e.absUrl("href"));
-                    e.attr("data-src", e.absUrl("data-src"));
+                    if(e.hasAttr("src")){e.attr("src", e.absUrl("src"));}
+                    if(e.hasAttr("href")){e.attr("href", e.absUrl("href"));}
+                    if(e.hasAttr("data-src")){e.attr("data-src", e.absUrl("data-src"));}
                     //Log.d("Abs Url: ",e.outerHtml());
                 }
             }catch (Exception e){}
