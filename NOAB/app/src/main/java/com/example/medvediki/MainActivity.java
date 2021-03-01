@@ -66,14 +66,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         button = findViewById(R.id.button);
-        textview = findViewById(R.id.textView);
+
         textview2 = findViewById(R.id.textView2);
         edittext = findViewById(R.id.editText);
         edittext2 = findViewById(R.id.editText2);
         edittext2.setBackgroundColor(Color.TRANSPARENT);
         exec = new Exec();
-        textview.setMovementMethod(new ScrollingMovementMethod());
-        textview.setBackgroundColor(Color.WHITE);
         textview2.setMovementMethod(new ScrollingMovementMethod());
         textview2.setBackgroundColor(Color.WHITE);
         textview3 = findViewById(R.id.textView3);
@@ -106,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                     //Double click
                     if (ii == 2)
                 {
-                        textview.setVisibility(View.INVISIBLE);
+                        //textview.setVisibility(View.INVISIBLE);
                         textview2.setVisibility(View.VISIBLE);
                         textview2.setElevation(4);
                         flag=false;
@@ -367,7 +365,6 @@ public class MainActivity extends AppCompatActivity {
             outContent = list.get(iterDoc-1).outerHtml();
             flag=true;
             webview.loadDataWithBaseURL(null, outContent, "text/html", "ru_RU", null);
-            textview.setText(outContent);
             textview2.setText(outContent);
             lockedDoublePress = false;
         }
