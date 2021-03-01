@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         int ii = 0;
         int margin=0;
 
-        ////////////////TEST DOUBLE CLICK on small textview
+        ////////////////TEST DOUBLE CLICK on edittext2
         edittext2.setOnClickListener(new View.OnClickListener() {
 
             int ii = 0;
@@ -114,52 +114,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*webview.setOnClickListener(new View.OnClickListener() {
-            ConstraintSet set;
-            int ii = 0;
-            int color=1;
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                ii++;
-                Handler handler = new Handler();
-                Runnable r = new Runnable() {
-
-                    @Override
-                    public void run() {
-                        ii = 0;
-                    }
-                };
-
-                if (ii == 1) {
-                    //Single click
-                    handler.postDelayed(r, 250);
-                } else
-                    //Double click
-                    if (ii == 2)
-                    {
-
-                        if(urlEdit)
-                        {
-                            edittext2.setVisibility(View.INVISIBLE);
-                            set.clear(R.id.webView, ConstraintSet.BOTTOM);
-                            set.connect(R.id.webView, ConstraintSet.BOTTOM, R.id.parent, ConstraintSet.BOTTOM);
-                            urlEdit=!urlEdit;
-                        }
-                        else
-                        {
-                            edittext2.setVisibility(View.GONE);
-                            set.clear(R.id.webView, ConstraintSet.BOTTOM);
-                            set.connect(R.id.webView, ConstraintSet.BOTTOM, R.id.editText2, ConstraintSet.TOP);
-                            urlEdit=!urlEdit;
-                        }
-
-
-                    }
-
-            }
-        });*/
-
         textview2.setOnClickListener(new View.OnClickListener() {
             int ii = 0;
             int color=1;
@@ -185,7 +139,6 @@ public class MainActivity extends AppCompatActivity {
                     {
 
                         textview2.setVisibility(View.INVISIBLE);
-                        //textview.setVisibility(View.VISIBLE);
                         flag=false;
 
                         //Log.d(TAG, "openSmallTextView ");
@@ -211,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
    class MyTask extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... params) {
-            
+
             doc = null;//Здесь будет разобранный html документ
             try {
                 doc = Jsoup.connect(str2).get();
