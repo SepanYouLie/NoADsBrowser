@@ -2,7 +2,7 @@
 <Resources>
 <URL>mail.ru</URL>
 <URL>yandex.ru</URL>
-<URL>fishki.net
+<URL>fishki.net<id>main-content<style>width:inherit</style></id>
 
 <Remove>
     <class>sidebar</class>
@@ -18,23 +18,6 @@
     <class>comment-share</class>
     <tag>script</tag>
 </Remove>
-</URL>
-<URL>m.fishki.net
-
-    <Remove>
-        <class>sidebar</class>
-        <class>tiny__info</class>
-        <class>header-nav</class>
-        <class>header-settings</class>
-        <class>content__top-links</class>
-        <class>popup-meta</class>
-        <class>header_announcement</class>
-        <class>content__figure__share</class>
-        <class>on--community</class>
-        <class>community-post-header</class>
-        <class>comment-share</class>
-        <tag>script</tag>
-    </Remove>
 </URL>
     <URL>*<Remove>
 
