@@ -233,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
             Elements links;
 
 
-            try
+            /*try
             {
                 links = doc.select("a");
                 //links = doc.getAllElements();
@@ -244,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("Abs Url: ",link.outerHtml());
             }
             }
-            catch(Exception e){}
+            catch(Exception e){}*/
             exec.doThread(inetFlag);
 
 
