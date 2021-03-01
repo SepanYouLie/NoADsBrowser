@@ -211,8 +211,8 @@ public class MainActivity extends AppCompatActivity {
    class MyTask extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... params) {
-            //Тут пишем основной код
-            doc = null;//Здесь хранится будет разобранный html документ
+            
+            doc = null;//Здесь будет разобранный html документ
             try {
                 doc = Jsoup.connect(str2).get();
                 inetFlag = true;
